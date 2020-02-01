@@ -92,8 +92,6 @@ def add_maps_from_params_csv_file(mapster: Mapster, params_csv_file):
         return SYS_ERROR
 
     for idx, (key, map_param) in enumerate(maps_params.items()):
-        if idx > 0:
-            continue
         try:
             response_txt = mapster.add_map(map_param)
             # click.echo(map_param)
