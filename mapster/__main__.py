@@ -68,7 +68,7 @@ def maps():
 
 
 @maps.command('create_params_file')
-@click.argument('params_csv_file', required=True, type=click.File('w'))
+@click.argument('params_csv_file', required=True, type=click.File('wb'))
 @click.argument('config_file',  required=True, type=click.File('r'))
 @pass_mapster
 def maps_create_params_file(mapster: Mapster, params_csv_file, config_file):
@@ -151,7 +151,7 @@ def create_csv_params_file(mapster: Mapster, config_file, params_csv_file):
                 echo_warning(f"Params file was't created because of errors. Please check, fix and run again.")
                 return SYS_ERROR
             # click.echo(f"{maps_configs.keys()}")
-            params_csv_file.write(dict2csv(maps_configs))
+            params_csv_file.write(dict2csv(maps_configs).encode())
             return SYS_OK
         except Exception as e:
             echo_error(f"ERROR: {e}")
