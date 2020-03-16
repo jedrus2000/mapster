@@ -68,7 +68,7 @@ def maps():
 
 
 @maps.command('create_params_file')
-@click.argument('config_file',  required=True, type=click.File('r'))
+@click.argument('config_file',  required=True, type=click.File('r', encoding='utf-8'))
 @click.option('-o', '--output-params-csv-file', type=click.File('wb'), help='File name of output params CSV file.')
 @pass_mapster
 def maps_create_params_file(mapster: Mapster, output_params_csv_file, config_file):
@@ -77,7 +77,7 @@ def maps_create_params_file(mapster: Mapster, output_params_csv_file, config_fil
 
 
 @maps.command('add')
-@click.argument('params_csv_file', required=True, type=click.File('r'))
+@click.argument('params_csv_file', required=True, type=click.File('r', encoding='utf-8'))
 @pass_mapster
 def maps_add(mapster: Mapster, params_csv_file):
     """Add maps from parameters in CSV file"""
@@ -116,6 +116,7 @@ def create_csv_params_file(mapster: Mapster, config_file, params_csv_file):
         #   click.echo(filename_pattern)
         try:
             encoding = get_file_utf8_encoding(map_images_list_filename)
+            # click.echo(encoding)
             maps_configs = {}
             with map_images_list_filename.open("r", encoding=encoding) as f:
                 for image_filename in f:
