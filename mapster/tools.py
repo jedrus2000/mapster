@@ -33,7 +33,7 @@ def get_file_utf8_encoding(file_path: Path):
 
 def dict2csv(d: dict) -> str:
     csvio: StringIO = io.StringIO(newline='')
-    writer = csv.DictWriter(csvio, fieldnames=list(d[next(iter(d))].keys()))
+    writer = csv.DictWriter(csvio, fieldnames=list(d[next(iter(d))].keys()), dialect='excel', quoting=csv.QUOTE_ALL)
     writer.writeheader()
     for key, item in d.items():
         writer.writerow(item)
